@@ -52,34 +52,20 @@ a:hover {
 	display: block;
 }
 
-.attendance {
+.attendance, .marks, .timetable{
 	margin: 5px 10px 5px 0px;
 	padding: 10px 20px 20px 5px;
 	box-shadow: 0 0 10px 10px #f2f2f2;
 	background-color: #ffffff;
 }
 
-.attendance-table {
+.attendance-table, .marks-table, .timetable-table{
 	width: 100%;
 }
 
-.attendance-table > thead {
+.marks-table > thead, .attendance-table > thead, .timetable-table > thead {
 	background-color: #00bd0d;
 	color: #ffffff;
-}
-
-.marks {
-	margin: 5px 10px 5px 0px;
-	padding: 10px 20px 20px 5px;
-	box-shadow: 0 0 10px 10px #f2f2f2;
-	background-color: #ffffff;
-}
-
-.time-table {
-	margin: 5px 10px 5px 0px;
-	padding: 10px 20px 20px 5px;
-	box-shadow: 0 0 10px 10px #f2f2f2;
-	background-color: #ffffff;
 }
 
 .footer {
@@ -91,6 +77,6 @@ a:hover {
 	text-align: center;
 	font-weight: bold;
 	padding-top: 5px;
-	color: #ffffff;
 	background-color: #0078ff;
+	color: #ffffff;
 }
