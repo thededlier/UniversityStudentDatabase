@@ -14,6 +14,11 @@
 
 	<!-- Latest compiled JavaScript -->
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+	<!-- Angular JS -->
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+    
+    <script src="js/app.js"></script>
 	
 	<link rel="stylesheet" href="css/stylesheet.css" type="text/css">
 	
@@ -48,7 +53,7 @@
 	<div class="row" style="margin-top: 55px;">
 		<div class ="container">
 			<div class="col-xs-12 col-sm-12 student-details">
-				<h1 id="welcome-name">Welcome, Rohan Anand</h1>
+				<h1>Welcome, Rohan Anand</h1>
 				<hr />
 				<img class="col-xs-12 col-sm-3" src="img/John-Reese-person-of-interest.jpg">
 				<ul class="col-sm-2 col-xs-12" float="left">
@@ -70,15 +75,17 @@
 					<li>: 2014</li>
 				</p>
 			</div>
-			<div class="col-xs-12 col-sm-12 news-feed">
+			<div class="col-xs-12 col-sm-12 news-feed"  ng-app="News" ng-controller="NewsCtrl">
 				<h3>Updates</h3>
 				<hr />
-				<ul>
-					<li><a href="#">Exam results are out</a></li>
-					<li><a href="#">Exam results are out</a></li>
-					<li><a href="#">Exam results are out</a></li>
-					<li><a href="#">Exam results are out</a></li>
-				</ul>
+				<div ng-repeat="post in posts">
+					<a ng-show="post.title" href="{{post.link}}">
+						{{post.title}}
+					</a>
+					<span ng-hide="post.link">
+						{{post.title}}
+					</span>
+				</div>
 			</div>
 		</div>
 	</div>
