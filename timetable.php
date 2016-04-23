@@ -1,3 +1,7 @@
+<?php
+	include("scripts/student/fetch_timetable.php");
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -26,7 +30,7 @@
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="index.html">SRM Student Portal</a>
+				<a class="navbar-brand" href="index.php">SRM Student Portal</a>
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
@@ -36,10 +40,11 @@
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="timetable.html">Timetable</a></li>
-					<li><a href="marks.html">Marks</a></li>
-					<li><a href="attendance.html">Attendance</a></li>
+					<li><a href="profile.php">Profile</a></li>
+					<li><a href="timetable.php">Timetable</a></li>
+					<li><a href="marks.php">Marks</a></li>
+					<li><a href="attendance.php">Attendance</a></li>
+					<li><a href="scripts/logout.php">Logout</a></li>
 				</ul>
 			</div>
 		</div>
@@ -55,72 +60,36 @@
 						<thead>
 							<tr>
 								<th>Day Order</th>
-								<th>1</th>
-								<th>2</th>
-								<th>3</th>
-								<th>4</th>
-								<th>5</th>
-								<th>6</th>
-								<th>7</th>
-								<th>8</th>
+								<th>Hour 1</th>
+								<th>Hour 2</th>
+								<th>Hour 3</th>
+								<th>Hour 4</th>
+								<th>Hour 5</th>
+								<th>Hour 6</th>
+								<th>Hour 7</th>
+								<th>Hour 8</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<th>1</th>
-								<td>IT1001</td>
-								<td>IT1002</td>
-								<td>IT1003</td>
-								<td>IT1004</td>
-								<td>IT1005</td>
-								<td>IT1006</td>
-								<td>IT1007</td>
-								<td>IT1008</td>
-							</tr>
-							<tr>
-								<th>2</th>
-								<td>IT1001</td>
-								<td>IT1002</td>
-								<td>IT1003</td>
-								<td>IT1004</td>
-								<td>IT1005</td>
-								<td>IT1006</td>
-								<td>IT1007</td>
-								<td>IT1008</td>
-							</tr>
-							<tr>
-								<th>3</th>
-								<td>IT1001</td>
-								<td>IT1002</td>
-								<td>IT1003</td>
-								<td>IT1004</td>
-								<td>IT1005</td>
-								<td>IT1006</td>
-								<td>IT1007</td>
-								<td>IT1008</td>
-							</tr>
-							<tr>
-								<th>4</th>
-								<td>IT1001</td>
-								<td>IT1002</td>
-								<td>IT1003</td>
-								<td>IT1004</td>
-								<td>IT1005</td>
-								<td>IT1006</td>
-								<td>IT1007</td>
-								<td>IT1008</td>
-							</tr>
-							<tr>
-								<th>5</th>
-								<td>IT1001</td>
-								<td>IT1002</td>
-								<td>IT1003</td>
-								<td>IT1004</td>
-								<td>IT1005</td>
-								<td>IT1006</td>
-								<td>IT1007</td>
-								<td>IT1008</td>
-							</tr>
+							<?php 
+								if($flag == 1) {
+									$rows = mysqli_num_rows($result);
+									if($rows > 0) {
+										while($row = mysqli_fetch_assoc($result)) {
+											echo "<tr><th>".$row["day_order"]."</th>";
+											echo "<td>".$row["hour_1"]."</td>";
+											echo "<td>".$row["hour_2"]."</td>";
+											echo "<td>".$row["hour_3"]."</td>";
+											echo "<td>".$row["hour_4"]."</td>";
+											echo "<td>".$row["hour_5"]."</td>";
+											echo "<td>".$row["hour_6"]."</td>";
+											echo "<td>".$row["hour_7"]."</td>";
+											echo "<td>".$row["hour_8"]."</td></tr>";
+										}
+									}
+								}
+								mysqli_close($connection);
+							?>
 						</tbody>
 					</table>
 				</div>

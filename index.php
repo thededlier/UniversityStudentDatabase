@@ -1,3 +1,10 @@
+<?php
+	include("scripts/check_login.php");
+	if(isset($_SESSION["login_user"])){
+		header("location: profile.php");
+	}
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -14,11 +21,6 @@
 
 	<!-- Latest compiled JavaScript -->
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-	<!-- Angular JS -->
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
-    
-    <script src="js/app.js"></script>
 	
 	<link rel="stylesheet" href="css/stylesheet.css" type="text/css">
 	
@@ -26,12 +28,12 @@
 	
 </head>
 
-<body>
+<body style="background:url(img/logbg.jpg); background-size: 100% auto; position: fixed">
 
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="index.html">SRM Student Portal</a>
+				<a class="navbar-brand" href="index.php">SRM Student Portal</a>
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
@@ -41,44 +43,25 @@
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="timetable.html">Timetable</a></li>
-					<li><a href="marks.html">Marks</a></li>
-					<li><a href="attendance.html">Attendance</a></li>
+					<li><a href="index.php">Home</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
-	
-	<div class="row" style="margin-top: 55px;" ng-app="Subject" ng-controller="subCtrl">
-		<div class ="container">
-			<div class="col-xs-12 col-sm-12 attendance">
-				<h1 style="text-align: center;">Attendance</h1>
+	<div class="row" style="margin-top: 55px">
+		<div class="container">
+			<div class="col-sm-4 col-xs-12 login">
+				<h3>SRM University</h3>
+				<h2>Login</h2>
 				<hr />
-				<div class="table-responsive">
-					<table class="table-striped attendance-table">
-						<thead>
-							<tr>
-								<th>Code</th>
-								<th>Subject</th>
-								<th>Hours Missed</th>
-								<th>Hours Attended</th>
-								<th>Hours Taken</th>
-								<th>Attendance</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="sub in subjects">
-								<td>{{sub.code}}</td>
-								<td>{{sub.subName}}</td>
-								<td>{{sub.hrsMissed}}</td>
-								<td>{{sub.hrsAtt}}</td>
-								<td>{{sub.hrsTaken}}</td>
-								<td>{{sub.attPerc}}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				<form action="" method="POST">
+					<input type="text" id="username" name="username" autofocus="on" placeholder="Username">
+					<input type="password" id="password" name="password" placeholder="Password">
+					<input type="radio" name="user_type" value="student" checked><span style="margin: 1px 3px 1px 3px;">Student</span>
+					<input type="radio" name="user_type" value="faculty"><span style="margin: 1px 3px 1px 3px;">Faculty</span>
+					<input type="submit" name="submit" value="Login">
+					<span style="color: #ff0000"><?php echo $error; ?></span>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -86,6 +69,7 @@
 	<footer class="footer">
 		<p>Rohans Student Database</p>
 	</footer>
+
 </body>
 
 </html>

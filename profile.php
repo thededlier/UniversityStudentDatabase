@@ -1,3 +1,7 @@
+<?php
+	include("scripts/student/fetch_profile.php");
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -14,11 +18,6 @@
 
 	<!-- Latest compiled JavaScript -->
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-	<!-- Angular JS -->
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
-    
-    <script src="js/app.js"></script>
 	
 	<link rel="stylesheet" href="css/stylesheet.css" type="text/css">
 	
@@ -31,7 +30,7 @@
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="index.html">SRM Student Portal</a>
+				<a class="navbar-brand" href="index.php">SRM Student Portal</a>
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
@@ -41,10 +40,11 @@
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="timetable.html">Timetable</a></li>
-					<li><a href="marks.html">Marks</a></li>
-					<li><a href="attendance.html">Attendance</a></li>
+					<li><a href="profile.php">Profile</a></li>
+					<li><a href="timetable.php">Timetable</a></li>
+					<li><a href="marks.php">Marks</a></li>
+					<li><a href="attendance.php">Attendance</a></li>
+					<li><a href="scripts/logout.php">Logout</a></li>
 				</ul>
 			</div>
 		</div>
@@ -53,7 +53,7 @@
 	<div class="row" style="margin-top: 55px;">
 		<div class ="container">
 			<div class="col-xs-12 col-sm-12 student-details">
-				<h1>Welcome, Rohan Anand</h1>
+				<h1>Welcome, <?php echo $row["name"] ?></h1>
 				<hr />
 				<img class="col-xs-12 col-sm-3" src="img/John-Reese-person-of-interest.jpg">
 				<ul class="col-sm-2 col-xs-12" float="left">
@@ -66,26 +66,39 @@
 					<li>Batch</li>		
 				</ul>
 				<ul class="col-sm-7 col-xs-12" style="color: #00007b">
-					<li>: Rohan Anand</li>
-					<li>: RA0000000000000</li>
-					<li>: DD/MM/YYYY</li>          
-					<li>: Generic Name</li> 
-					<li>: Generic College</li> 	 
-					<li>: Generic Branch</li> 		 
-					<li>: 2014</li>
+					<li>: <?php echo $row["name"] ?></li>
+					<li>: <?php echo $row["roll_no"] ?></li>
+					<li>: <?php echo $row["dob"] ?></li>          
+					<li>: <?php echo $row["fathers_name"] ?></li> 
+					<li>: <?php echo $row["college"] ?></li> 	 
+					<li>: <?php echo $row["branch"] ?></li> 		 
+					<li>: <?php echo $row["batch"] ?></li>
 				</p>
 			</div>
-			<div class="col-xs-12 col-sm-12 news-feed"  ng-app="News" ng-controller="NewsCtrl">
+			<div class="col-xs-12 col-sm-12 news-feed">
 				<h3>Updates</h3>
 				<hr />
-				<div ng-repeat="post in posts">
-					<a ng-show="post.title" href="{{post.link}}">
-						{{post.title}}
-					</a>
-					<span ng-hide="post.link">
-						{{post.title}}
-					</span>
-				</div>
+					<ul>
+						<?php
+							// Create connection
+							$connection = mysqli_connect("localhost", "stu_viewer", "", "news");
+							// Check connection
+							if (!$connection) {
+							    die("Connection failed: " . mysqli_connect_error());
+							}
+
+							$result = mysqli_query($connection, "SELECT news_title, news_link FROM news_feed");
+							$rows = mysqli_num_rows($result);
+							if($rows > 0) {
+								$count = 0;
+								while($row = mysqli_fetch_assoc($result) and $count< 6) {
+									echo "<li><a href=".$row["news_link"].">".$row["news_title"]."</a></li>";
+									$count++;
+								}
+							}
+							mysqli_close($connection);
+						?>
+					</ul>
 			</div>
 		</div>
 	</div>
